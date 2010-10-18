@@ -1,0 +1,19 @@
+.mod(class=name+' tabcontent')
+  b.top
+    b.tl
+    b.tr
+  .inner
+    .hd
+      div
+      a.editaction.view(href="#") edit
+      button.saveaction.edit save
+      a.cancelaction.edit(href="#") cancel
+    .bd
+      .view
+        != markup
+      .edit
+        textarea(id=name+'_text')=text
+    .ft
+  b.bottom
+    b.bl
+    b.br

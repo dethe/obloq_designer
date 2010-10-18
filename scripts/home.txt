@@ -1,0 +1,52 @@
+Current Problems:
+
+* Speed
+* Scalability
+* Complexity
+* Identifying dead code
+* Refactoring
+* Lack of tests
+* Lack of performance metrics
+* Logging in from multiple accounts
+* Replying to invite while logged in
+* Backend communications - Magento, Python, Image servers
+* Sending updates to web client (Socket.io?)
+* Splitting Kinzin into services
+    - What is the API between service?
+    - Which things need to be services, which kept together
+    - Some options: marketing, login, photostore, social site (space, albums), products, shopping cart
+* As we move forward, restructuring templates, we should use something that works well on both client and server, and across different server technologies. I suspect something like moustache would serve best (works in Ruby, CouchDB, Node.js, and the browser).
+
+What needs to be captured?
+
+* Component Name
+* Context
+* Screen shot
+* Wireframe
+* HTML template
+* Path to HTML template
+* Component controller
+* Subcomponent listing (with links to those docs)
+* Colors used
+* Fonts used
+* Dimensions
+* Other styles
+* Boilerplate text (put in CMS for updates/translation) (can we assume this rarely changes?)
+* User text/images (api for retrieving these) (how often does it change? Do we need to reload dynamically? How can we tell if it has changed?)
+* Required roles (permissions)
+* Differences based on role
+* Events
+* Behaviours
+* REST interactions (url templates and controllers)
+* UI interactions
+* Dependencies on other components
+* Required browser capabilities / libraries
+* Preferences / Settings / Persistence
+* Initialization
+* Reset / Undo
+* Other scripts
+* Used by other components
+* Used in applications
+* Asynchronous Processes triggered
+* Callbacks from Asynch processes (how are these communicated to user?)
+* Leads to view(s)

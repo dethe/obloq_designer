@@ -1,0 +1,21 @@
+- if (typeof(id) === 'undefined')
+  - var id = ''
+- if (typeof(class) === 'undefined')
+  - var class = ''
+.mod(id=id, class=class)
+  b.top
+    b.tl
+    b.tr
+  .inner
+    .hd
+      - if (typeof(hd) !== 'undefined')
+        #{hd}
+    .bd
+      - if (typeof(bd) !== 'undefined')
+        #{bd}
+    .ft
+      - if (typeof(ft) !== 'undefined')
+        #{ft}
+  b.bottom
+    b.bl
+    b.br

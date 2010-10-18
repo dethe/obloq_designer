@@ -1,0 +1,68 @@
+.nav{
+    background-color: #CCC;
+}
+
+.nav .hd{
+    position: relative;
+}
+
+.nav h2{
+    float: left;
+}
+
+.editaction, .cancelaction, .deleteaction{
+    position: relative;
+    bottom: 0px;
+    font-size: 6px;
+    float: right;
+    margin: 10px;
+    line-height: 27px;
+}
+.saveaction{
+    font-size: 8px;
+    float: right;
+    margin: 10px;
+}
+.edit{
+    display: none;
+}
+
+.mod.tabs .hd{
+    border-bottom: 2px solid #333;
+}
+
+.tab{
+    float: left;
+    display: inline-block;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin: 1px;
+    margin-bottom: -2px;
+    border: 2px solid #333;
+    background-color: #CCC;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    -moz-border-radius-topright: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.tab.selected{
+    background-color: #FFF;
+    border-bottom-color: #FFF;
+}
+
+.tab.first{
+    margin-left: 20px;
+}
+
+.tabcontent{
+    display: none;
+}
+
+textarea{
+    width: 100%;
+    height: 10em;
+}

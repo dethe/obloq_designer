@@ -1,0 +1,11 @@
+.mod.bloq
+  h2= componentname
+  .edit
+    h3 Attachments
+      - each attachment, id in attachments
+        .attachment
+          a(href=id) #{id}
+          a.deleteaction(href="#") delete
+      button.load Upload Attachment
+
+  != partial('tabcontent_mod', {collection: tabcontent, as: global})

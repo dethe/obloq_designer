@@ -1,0 +1,7 @@
+{
+   "_id": "home_page",
+   "context_text": "Describe component here",
+   "wireframes_text": "Describe wire frames here, with links to images",
+   "behaviour_text": "Describe behaviour here, with links to images",
+   "code_text": "Describe code here, with examples of html, css, and javascript"
+}

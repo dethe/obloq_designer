@@ -1,0 +1,6 @@
+#!/bin/bash
+# to use: upload {docid} {imgtype} {filename}
+echo TEST:
+echo curl -vX PUT http://localhost:5984/kinzin/${1}/ -H "\"Content-Type: image/${2}\""  -H "\"Transfer-Encoding: chunked\"" --data-binary @${3}
+echo FOR REALS:
+curl -vX PUT http://localhost:5984/kinzin/${1}/ -H "\"Content-Type: image/${2}\"" --data-binary @${3}
