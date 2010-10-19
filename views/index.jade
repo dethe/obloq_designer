@@ -4,7 +4,7 @@
     h3 Attachments
       - each attachment, id in attachments
         .attachment
-          a(href=id) #{id}
+          a(href=couchbase+pagename+'/'+id) #{id}
           a.deleteaction(href="#") delete
       button.load Upload Attachment
 

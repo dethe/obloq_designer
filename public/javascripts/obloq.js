@@ -68,11 +68,9 @@ var $o = {
         var savedata = {}, field;
         $.each(['context', 'wireframes', 'behaviour', 'code'], function(idx, name){
             field = name + '_text';
-            console.log('field: ' + field);
             savedata[field] = $('#' + field).val();
         });
-        console.log(savedata);
-        $.post(location.href, savedata);
+        $.post(location.href, savedata, function(){location.reload();});
         $o.viewmode(evt);
     },
     deletedata: function(evt){
