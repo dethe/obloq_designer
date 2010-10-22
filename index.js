@@ -6,6 +6,7 @@ var couchbase = config['couchbase'];
 // console.log('couchbase: %s', couchbase);
 var express = require('express'),
     jade = require('jade'),
+    formidable = require('formidable'),
     app = express.createServer(
         express.bodyDecoder(),
         express.methodOverride(),
@@ -69,6 +70,15 @@ app.post('/:page', function(req, res){
 });
 
 function save_page(page_name, req, res){
+    if (req.header('Content-type').indexOf('multipart/form-data') > -1){
+        upload_file(page_name, req, res);
+        return;
+    }
+    // console.log('saving page %s', page_name)
+    // console.log('body: %s', req.body);
+    // console.log('params: %s', req.params.length);
+    // console.log('query: %s', req.query);
+    // console.log('content-type: %s', req.header('Content-type'));
     db.getDoc(page_name, function(err, result){
         if (err){
             console.log('Unable to retrieve page from DB');
@@ -128,6 +138,41 @@ function get_page(page_name, req, res){
         res.render('index', {locals: locals});
     });
 }
+
+function upload_err(file, res, message){
+    console.log(message);
+    if (f){
+        fs.unlink(f.path);
+    }
+    res.writeHead(200, {'content-type': 'text/plain'});
+    res.write('error');
+    res.end();
+}
+
+function upload_file(page_name, req, res){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files){
+        if (err){
+            upload_err(null, res, 'Error while uploading file'); return;
+        }
+        f = files.userfile;
+        db.getDoc(page_name, function(err, doc){
+            if (err){
+                upload_err(f, res, 'error loading document for attachment'); return;
+            }
+            db.saveAttachment(f.path, page_name, {name: f.filename, contentType: f.mime, rev: doc._rev}, function(err, doc){
+                if (err){
+                    upload_err(f, res, 'Error loading file into couch attachment'); return;
+                }
+                console.log('received upload: %s, saved to couch', files.userfile.filename);            
+                res.writeHead(200, {'Content-type': 'text/plain'});
+                res.end('success');
+                return;
+            });
+        });
+    });
+}
+
 
 app.configure(function(){
     app.use(app.router);

@@ -11,12 +11,13 @@
 }
 
 .editaction, .cancelaction, .deleteaction{
-    position: relative;
-    bottom: 0px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     font-size: 6px;
-    float: right;
-    margin: 10px;
-    line-height: 27px;
+}
+.cancelaction{
+    right: 60px;
 }
 .saveaction{
     font-size: 8px;
@@ -69,4 +70,14 @@ textarea{
 
 .inner img{
     max-width: 100%;
+}
+
+.attachment{
+    overflow: hidden;
+    background-color: #CDF;
+    position: relative;
+    margin-bottom: 8px;
+}
+input[type=file]{
+    opacity: 0;
 }

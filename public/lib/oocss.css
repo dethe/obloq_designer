@@ -35,7 +35,7 @@ body{_text-align:center;}/* IE5.5 */
 .unit{float:left;}
 .size1of1{float:none;}
 .size1of2{width:50%;}
-.size1of3{width:33.33333%;}
+.size1of3{width:33.40202033%;}
 .size2of3{width:66.66666%;}
 .size1of4{width:25%;}
 .size3of4{width:75%;}
@@ -132,15 +132,15 @@ cite{display:block; text-align:right; padding-top: 10px;}
 /* oocss/core/heading/heading.css */
 /* ====== Headings ====== */
 /* .h1-.h6 classes should be used to maintain the semantically appropriate heading levels - NOT for use on non-headings */
-h1, .h1{font-size:196%; font-weight:normal; font-style: normal; color:#AE0345;}
-h2, .h2{font-size:167%; font-weight:normal; font-style: normal; color:#AE0345;}
-h3, .h3{font-size:146.5%; font-weight:normal; font-style: normal; color:#DF2B72;}
-h4, .h4{font-size:123.1%; font-weight:normal; font-style: normal; color: #333;}
-h5, .h5{font-size:108%; font-weight:bold; font-style: normal; color:#AE0345;}
-h6, .h6{font-size:108%; font-weight:normal; font-style: italic; color:#333;}
+h1, .h1{font-size:196%; font-weight:normal; font-style: normal; color:#406040;}
+h2, .h2{font-size:167%; font-weight:normal; font-style: normal; color:#406040;}
+h3, .h3{font-size:146.5%; font-weight:normal; font-style: normal; color:#604040;}
+h4, .h4{font-size:123.1%; font-weight:normal; font-style: normal; color: #402020;}
+h5, .h5{font-size:108%; font-weight:bold; font-style: normal; color:#406040;}
+h6, .h6{font-size:108%; font-weight:normal; font-style: italic; color:#402020;}
 /* if additional headings are needed they should be created via additional classes, never via location dependant styling */
-.category{font-size:108%; font-weight:normal; font-style: normal; text-transform:uppercase; color: #333;}
-.category a{color: #333;}
+.category{font-size:108%; font-weight:normal; font-style: normal; text-transform:uppercase; color: #402020;}
+.category a{color: #402020;}
 /* oocss/core/spacing/space.css */
 /** 
  * Spacing classes 
@@ -254,11 +254,11 @@ TODO: clean up selector structure - too much variation in rule strength
 .tabControl li{border-right:solid 1px #ccc; border-left:solid 1px #fff;}
 .tabControl li:last-child{border-right:none;}
 .tabControl li:first-child{border-left:none;}
-.tabs a{font-weight:normal; color: #333;}
+.tabs a{font-weight:normal; color: #402020;}
 .tabs .hd .tabControl .current{background-color: #fff;}
 .tabs li a:hover{color:#000;background-color: #fff;}
 .tabs .hd li.current a,.tabs .hd li.current span{cursor: default;}
-.tabs li.current a:hover{color:#333;}
+.tabs li.current a:hover{color:#402020;}
 .tabs .hd li span{cursor:pointer;}
 
 .controls{position:absolute; top:0; right: 0; display: none !important; /* this should move to its' own plugin */}

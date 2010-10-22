@@ -1,4 +1,7 @@
 var $o = {
+    selfurl: function(){
+        return location.href.split('#')[0].split('?')[0];
+    },
     gethash: function gethash(){
         var h = location.hash;
         if (h && h[0] === '#'){
@@ -12,6 +15,15 @@ var $o = {
             return q.slice(1);  // common case, but some browsers don't include the "?"
         }
         return q;
+    },
+    pageid: function(){
+        if (location.pathname === '/'){
+            return 'home_page';
+        }
+        return location.pathname.replace('/', '');
+    },
+    couchbase: function(){
+        return $('#couchbase').attr('href');
     },
     tabselect: function(name){
         var e;
@@ -53,7 +65,7 @@ var $o = {
             container = container.parent().closest('.mod');
         }
         container.find('.edit').show();
-        container.find('.view').hide();
+        container.find('.view.editaction').hide();
     },
     viewmode: function(evt){
         evt.preventDefault();
@@ -62,7 +74,7 @@ var $o = {
             container = container.parent().closest('.mod');
         }
         container.find('.edit').hide();
-        container.find('.view').show();
+        container.find('.view.editaction').show();
     },
     savedata: function(evt){
         var savedata = {}, field;
@@ -70,12 +82,16 @@ var $o = {
             field = name + '_text';
             savedata[field] = $('#' + field).val();
         });
-        $.post(location.href, savedata, function(){location.reload();});
+        $.post($o.selfurl(), savedata, function(){location.reload();});
         $o.viewmode(evt);
     },
     deletedata: function(evt){
         alert('delete the data');
         $o.viewmode();
+    },
+    addattachment: function(filename){
+        var href = [$o.couchbase(), $o.pageid(), filename].join('/'); 
+        $('#attachments').append('<li class="attachment"><a href="' + href + '">' + filename + '</a><a class="deleteaction" href="#">delete</a>');
     }
 };
 
@@ -86,4 +102,8 @@ $(function(){
     $('.saveaction').live('click', $o.savedata);
     $('.cancelaction').live('click', $o.viewmode);
     $('.deleteaction').live('click', $o.deletedata);
+    new AjaxUpload('loadaction', {action: $o.selfurl(), onComplete: function(file, response){
+        $o.addattachment(file);
+    }});
+    // $('.loadaction').live('click', $o.loadaction);
 });

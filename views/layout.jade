@@ -16,6 +16,7 @@ html.no-js(lang="en")
     link(rel="stylesheet", type="text/css", media="all", href="/stylesheets/obloq.css")
     link(rel="alternate", type="application/atom+xml", title="Atom feed", href="/feed/")
   body
+    a#couchbase(href=couchbase)
     .page
       .head
         != partial('head')
@@ -29,4 +30,5 @@ html.no-js(lang="en")
       .foot
     script(type="text/javascript", src="/lib/modernizr-1.5.min.js")
     script(type="text/javascript", src="/lib/jquery-1.4.2.min.js")
+    script(type="text/javascript", src="/lib/ajaxupload.js")
     script(type="text/javascript", src="/javascripts/obloq.js")
