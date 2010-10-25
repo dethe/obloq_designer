@@ -23,27 +23,31 @@ var db = client.db(config.database);
 // things to update from database
 var locals = {
     couchbase: couchbase,
-    title: 'Kinzin Design Specification',
-    nav_lists: [
-        {id: 'layout_list', title: 'Layouts', list: []},
-        {id: 'bars_list', title: 'Bars', list: []},
-        {id: 'card_list', title: 'Cards', list: []},
-        {id: 'dialog_list', title: 'Dialogs', list: []}
-    ]
+    title: 'Kinzin Design Specification'
 };
 
 // Fill navigation lists from database
-locals.nav_lists.forEach(function(list_info){
-    // console.log('trying to retrieve %s', list_info.id);
-    db.getDoc(list_info.id, function(err, result){
+db.view('indices', 'index', null, function(err, result){
         if (err){
-            console.log('Error: %s while trying to load layout list', err);
-            return;
-        }   
-        // console.log('result of accessing %s is: %s', name, sys.inspect(result.values));
-        list_info.list = result.values;
-        // console.log('retrieved %s successfully', list_info.id);
+        console.log('Error: %s while trying to load index lists', err);
+        return;
+    }
+    var list_info = {};  //temp dictionary for collecting (CouchDB really should do this)
+    var list_collection = []; // list for sorting and partials
+    result.rows.forEach(function(row){
+        if (! list_info[row.key]){
+            list_info[row.key] = {title: row.key, list: []};
+            list_collection.push(list_info[row.key]); // same object in both dict and list
+        }
+        list_info[row.key].list.push({url: row.id, title: row.value});
     });
+    list_collection.forEach(function(sublist){
+        sublist.list.sort();  // Sort each sublist
+    });
+    list_collection.sort(); // Sort the list of lists
+    // console.log('result of accessing %s is: %s', 'index lists', sys.inspect(list_info));
+    locals.nav_lists = list_collection; // expose list of lists for partials
+    // console.log('retrieved %s successfully', list_info.id);
 });
 
 var tabs = ['context', 'wireframes', 'behaviour', 'code'];
