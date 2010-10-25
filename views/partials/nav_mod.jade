@@ -5,19 +5,11 @@
   .inner
     .hd
       h2 #{title}
-      a.editaction.view(href="#") edit
-      button.saveaction.edit save
-      a.cancelaction.edit(href="#") cancel
     .bd
       ul
         - each item in list
           li
-            a.view(href=item.url) #{item.title}
-            .edit
-              label url:
-              input(value=item.url)
-              label title:
-              input(value=item.title)
+            a(href=item.url) #{item.title}
     .ft
   b.bottom
     b.bl
