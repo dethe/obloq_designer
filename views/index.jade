@@ -1,12 +1,25 @@
 .mod.bloq
-  h2= componentname
-  .edit
-    h3 Attachments
-      ul#attachments
-        - each attachment, id in attachments
-          li.attachment
-            a(href=couchbase+'/'+pagename+'/'+id) #{id}
-            a.deleteaction(href="#") delete
-      button#loadaction Upload Attachment
-
-  != partial('tabcontent_mod', {collection: tabcontent, as: global})
+  b.top
+    b.tl
+    b.tr
+  .inner
+    .hd
+      a.editaction.view(href="#") edit
+      button.saveaction.edit save
+      a.cancelaction.edit(href="#") cancel
+      h2.view= componentname
+      input#title_text.edit(value=componentname)
+      .edit
+        h3 Attachments
+        ul#attachments
+          - each attachment, id in attachments
+            li.attachment
+              a(href=couchbase+'/'+pagename+'/'+id) #{id}
+              a.deleteaction(href="#") delete
+        button#loadaction Upload Attachment
+    .bd
+      != partial('tabcontent_mod', {collection: tabcontent, as: global})
+    .ft
+  b.bottom
+    b.bl
+    b.br

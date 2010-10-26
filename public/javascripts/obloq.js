@@ -64,8 +64,8 @@ var $o = {
         if (container.is('.tabcontent')){
             container = container.parent().closest('.mod');
         }
-        container.find('.edit').show();
-        container.find('.view.editaction').hide();
+        $('.edit').show();
+        $('.view').hide();
     },
     viewmode: function(evt){
         evt.preventDefault();
@@ -73,12 +73,12 @@ var $o = {
         if (container.is('.tabcontent')){
             container = container.parent().closest('.mod');
         }
-        container.find('.edit').hide();
-        container.find('.view.editaction').show();
+        $('.edit').hide();
+        $('.view').show();
     },
     savedata: function(evt){
         var savedata = {}, field;
-        $.each(['context', 'wireframes', 'behaviour', 'code'], function(idx, name){
+        $.each(['title', 'context', 'wireframes', 'behaviour', 'code'], function(idx, name){
             field = name + '_text';
             savedata[field] = $('#' + field).val();
         });

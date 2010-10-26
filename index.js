@@ -97,6 +97,9 @@ function save_page(page_name, req, res){
                     result[field] = req.param(field);
                 }
             });
+            if (req.param('title_text')){
+                result['title'] = req.param('title_text');
+            }
             db.saveDoc(result, function(err, data){
                 // console.log('saved data');
                 res.send({response: 'saved data', err: false});
