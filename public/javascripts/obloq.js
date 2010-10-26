@@ -40,7 +40,7 @@ var $o = {
         });
         location.hash = '#' + name;
         // also set all nav urls to have the hash, so we stay in the same view between pages
-        $('.nav li a.view').attr('href', function(idx, oldvalue){
+        $('.nav li a').attr('href', function(idx, oldvalue){
             return oldvalue.split('#')[0] + '#' + name;
         });
     },
@@ -60,19 +60,11 @@ var $o = {
     },
     editmode: function(evt){
         evt.preventDefault(evt);
-        var container = $(evt.target).closest('.mod');
-        if (container.is('.tabcontent')){
-            container = container.parent().closest('.mod');
-        }
         $('.edit').show();
         $('.view').hide();
     },
     viewmode: function(evt){
         evt.preventDefault();
-        var container = $(evt.target).closest('.mod');
-        if (container.is('.tabcontent')){
-            container = container.parent().closest('.mod');
-        }
         $('.edit').hide();
         $('.view').show();
     },

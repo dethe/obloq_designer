@@ -3,7 +3,7 @@ html.no-js(lang="en")
   head
     meta(charset="utf-8")
     - if (typeof(title) !== 'undefined')
-      title #{title}
+      title= title
     - else
       title oBloq Application
     //- begin iPhone webapp data
@@ -19,7 +19,7 @@ html.no-js(lang="en")
     a#couchbase(href=couchbase)
     .page
       .head
-        != partial('head')
+        h1= title
       .body
         nav.leftCol
           != partial('nav_mod', {collection: nav_lists, as: global})  
