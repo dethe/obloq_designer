@@ -14,7 +14,8 @@
         ul#attachments
           - each attachment, id in attachments
             li.attachment
-              a(href=couchbase+'/'+pagename+'/'+id) #{id}
+              a.insertaction(href="#") insert
+              a.resource(href=couchbase+'/'+pagename+'/'+id) #{id}
               a.deleteaction(href="#") delete
         button#loadaction Upload Attachment
     .bd

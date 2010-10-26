@@ -83,7 +83,20 @@ var $o = {
     },
     addattachment: function(filename){
         var href = [$o.couchbase(), $o.pageid(), filename].join('/'); 
-        $('#attachments').append('<li class="attachment"><a href="' + href + '">' + filename + '</a><a class="deleteaction" href="#">delete</a>');
+        $('#attachments').append('<li class="attachment"><a class="insertaction" href="#">insert</a><a class="resource" href="' + href + '">' + filename + '</a><a class="deleteaction" href="#">delete</a>');
+    },
+    insertattachment: function(evt){
+        evt.preventDefault();
+        var url = encodeURI($(evt.target).siblings('.resource').attr('href'));
+        var te = $('textarea:visible');
+        var oldval = $.trim(te.val());
+        var newval;
+        if (oldval){
+            newval = oldval + '\n\n![](' + url + ')\n';
+        }else{
+            newval = '![](' + url + ')\n';
+        }
+        te.val(newval);
     }
 };
 
@@ -94,6 +107,7 @@ $(function(){
     $('.saveaction').live('click', $o.savedata);
     $('.cancelaction').live('click', $o.viewmode);
     $('.deleteaction').live('click', $o.deletedata);
+    $('.insertaction').live('click', $o.insertattachment);
     new AjaxUpload('loadaction', {action: $o.selfurl(), onComplete: function(file, response){
         $o.addattachment(file);
     }});

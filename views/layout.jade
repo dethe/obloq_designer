@@ -19,7 +19,8 @@ html.no-js(lang="en")
     a#couchbase(href=couchbase)
     .page
       .head
-        h1= title
+        a(href='/')
+          h1= title
       .body
         nav.leftCol
           != partial('nav_mod', {collection: nav_lists, as: global})  
