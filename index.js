@@ -26,29 +26,42 @@ var locals = {
     title: 'Kinzin Design Specification'
 };
 
-// Fill navigation lists from database
-db.view('indices', 'index', null, function(err, result){
-        if (err){
-        console.log('Error: %s while trying to load index lists', err);
-        return;
-    }
-    var list_info = {};  //temp dictionary for collecting (CouchDB really should do this)
-    var list_collection = []; // list for sorting and partials
-    result.rows.forEach(function(row){
-        if (! list_info[row.key]){
-            list_info[row.key] = {title: row.key, list: []};
-            list_collection.push(list_info[row.key]); // same object in both dict and list
+function keysort(list_of_obj, key){
+    // Classic example of Decorate-Sort-Undecorate, or Schwartzian Transform
+    // http://en.wikipedia.org/wiki/Schwartzian_transform
+    return list_of_obj.map(function(obj){return [obj[key], obj];}).sort().map(function(list){return list[1];});
+}
+
+function load_navigation_lists(callback){
+    // Fill navigation lists from database
+    db.view('indices', 'index', null, function(err, result){
+            if (err){
+            console.log('Error: %s while trying to load index lists', err);
+            return;
         }
-        list_info[row.key].list.push({url: row.id, title: row.value});
+        var list_info = {};  //temp dictionary for collecting (CouchDB really should do this)
+        var list_collection = []; // list for sorting and partials
+        result.rows.forEach(function(row){
+            if (! list_info[row.key]){
+                list_info[row.key] = {title: row.key, list: []};
+                list_collection.push(list_info[row.key]); // same object in both dict and list
+            }
+            list_info[row.key].list.push({url: row.id, title: row.value});
+        });
+        list_collection.forEach(function(sublist){
+            sublist.list = keysort(sublist.list, 'title');  // Sort each sublist
+        });
+        list_collection.sort(); // Sort the list of lists
+        // console.log('result of accessing %s is: %s', 'index lists', sys.inspect(list_info));
+        locals.nav_lists = list_collection; // expose list of lists for partials
+        // console.log('retrieved %s successfully', list_info.id);
+        if (callback){
+            callback();
+        }
     });
-    list_collection.forEach(function(sublist){
-        sublist.list.sort();  // Sort each sublist
-    });
-    list_collection.sort(); // Sort the list of lists
-    // console.log('result of accessing %s is: %s', 'index lists', sys.inspect(list_info));
-    locals.nav_lists = list_collection; // expose list of lists for partials
-    // console.log('retrieved %s successfully', list_info.id);
-});
+}
+
+load_navigation_lists();
 
 var tabs = ['context', 'wireframes', 'behaviour', 'code'];
 
@@ -102,7 +115,9 @@ function save_page(page_name, req, res){
             }
             db.saveDoc(result, function(err, data){
                 // console.log('saved data');
-                res.send({response: 'saved data', err: false});
+                load_navigation_lists(function(){
+                    res.send({response: 'saved data', err: false});
+                });
             });
         }
     });
