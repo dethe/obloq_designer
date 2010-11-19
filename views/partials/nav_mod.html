@@ -1,0 +1,16 @@
+.mod.nav
+  b.top
+    b.tl
+    b.tr
+  .inner
+    .hd
+      h2 #{title}
+    .bd
+      ul
+        - each item in list
+          li
+            a(href=item.url) #{item.title}
+    .ft
+  b.bottom
+    b.bl
+    b.br

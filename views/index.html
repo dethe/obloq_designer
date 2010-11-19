@@ -1,0 +1,30 @@
+<div class="mod bloq">
+  <b class="top">
+    <b class="tl">
+    <b class="tr">
+  <div class="inner">
+    <div class="hd">
+      <a class="editaction view" href="#">edit</a>
+      <button class="saveaction edit">save</a>
+      <a class="cancelaction edit" href="#">cancel</a>
+      <h2 class="view">{{componentname}}</h2>
+      <input id="title_text" class="edit" value="{{componentname}}" />
+      <div class="edit">
+        <h3>Attachments</h3>
+        <ul id="attachments">
+          {{#attachments}}
+            <li class="attachment">
+              <a class="insertaction" href="#">insert</a>
+              <a class="resource" href="{{url}}">{{title}}</a>
+              <a class="deleteaction" href="#">delete</a>
+            </li>
+          {{/attachments}}
+        <button id="loadaction">Upload Attachment</button>
+    <div class="bd">
+      {{> tabcontent_mod}}
+    <div class="ft"></div>
+  <b class="bottom">
+    <b class="bl"></b>
+    <b class="br">/b>
+  </b>
+ </div>
